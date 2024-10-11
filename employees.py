@@ -48,25 +48,40 @@ class Employee(ABC):
             self._salary = salary
         else:
             raise ValueError(SALARY_ERROR_MESSAGE)
-    
+
     @property
     def name(self):
+        """
+        Property for the read-only variable name
+        """
         return self.__name
 
     @property
     def manager(self):
+        """
+        Property for the read-only variable manager
+        """
         return self.__manager
 
     @property
     def performance(self):
+        """
+        Property for the variable performance
+        """
         return self._performance
 
     @property
     def happiness(self):
+        """
+        Property for the variable happiness
+        """
         return self._happiness
 
     @property
     def salary(self):
+        """
+        Property for the variable salary
+        """
         return self._salary
 
     @performance.setter
@@ -86,7 +101,7 @@ class Employee(ABC):
             self._happiness = PERCENTAGE_MIN
         else:
             self._happiness = value
-    
+
     @salary.setter
     def salary(self, value):
         if value >= 0:
@@ -96,9 +111,15 @@ class Employee(ABC):
 
     @abstractmethod
     def work(self):
+        """
+        Abstract method simulating 1 hour of work for an employee
+        """
         pass
 
     def interact(self, other):
+        """
+        Simulates interactions between employees
+        """
         if other.name not in self.relationships:
             self.relationships[other.name] = 0
 
@@ -111,6 +132,9 @@ class Employee(ABC):
             self.happiness -= 1
 
     def daily_expense(self):
+        """
+        Simulates the daily expenses of an employee
+        """
         self.happiness -= 1
         self.savings -= DAILY_EXPENSE
 
@@ -122,6 +146,7 @@ class Manager(Employee):
     """
     A subclass of Employee representing a manager.
     """
+
     def work(self):
         rand_int = random.randint(-5, 5)
         self.performance += rand_int
@@ -138,6 +163,7 @@ class TemporaryEmployee(Employee):
     """
     A subclass of Employee representing a temporary employee.
     """
+
     def work(self):
         rand_int = random.randint(-15, 15)
         self.performance += rand_int
@@ -164,6 +190,7 @@ class PermanentEmployee(Employee):
     """
     A subclass of Employee representing a permanent employee.
     """
+
     def work(self):
         rand_int = random.randint(-10, 10)
         self.performance += rand_int
